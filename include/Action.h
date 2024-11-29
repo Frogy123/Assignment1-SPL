@@ -21,7 +21,7 @@ class BaseAction{
     protected:
         void complete();
         void error(string errorMsg);
-        const string &getErrorMsg() const;
+        const string& getErrorMsg() const;
 
     private:
         string errorMsg;
@@ -41,13 +41,14 @@ class SimulateStep : public BaseAction {
 
 class AddPlan : public BaseAction {
     public:
-        AddPlan(const string &settlementName, const string &selectionPolicy);
+        AddPlan(const string &settlementName, const string &selectionPolicy);   
         void act(Simulation &simulation) override;
         const string toString() const override;
         AddPlan *clone() const override;
     private:
         const string settlementName;
         const string selectionPolicy;
+        
         
 };
 
