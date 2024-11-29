@@ -38,12 +38,15 @@ void AddPlan::act(Simulation &simulation) {
     if (selectionPolicy == "nve") {
         policy = new NaiveSelection();
     } else if (selectionPolicy == "bal") {
-        policy = new BalancedSelection();       
+        policy = new BalancedSelection(0, 0, 0);       
     } else if (selectionPolicy == "eco") {
         policy = new EconomySelection();
     } else if (selectionPolicy == "env") {
         policy = new SustainabilitySelection();
     }
     // Add the plan to the simulation
-    simulation.addPlan(settlementName, &selectionPolicy);
+    if(simulation.isSettlementExists(settlementName)){
+        throw std::invalid_argument("Settlement does not exist");
+    }
+    simulation.addPlan(simulation.getSettlement(settlementName), policy);
 }

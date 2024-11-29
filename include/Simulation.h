@@ -12,18 +12,19 @@ class SelectionPolicy;
 
 class Simulation {
     public:
-        Simulation(const string &configFilePath);
-        void start();
-        void addPlan(const Settlement &settlement, SelectionPolicy *selectionPolicy);
-        void addAction(BaseAction *action);
-        bool addSettlement(Settlement *settlement);
-        bool addFacility(FacilityType facility);
-        bool isSettlementExists(const string &settlementName);
-        Settlement &getSettlement(const string &settlementName);
-        Plan &getPlan(const int planID);
-        void step();
-        void close();
-        void open();
+        Simulation(const string &configFilePath); //eitan
+        void start(); //david
+        void addPlan(const Settlement &settlement, SelectionPolicy *selectionPolicy); //eitan
+        void addAction(BaseAction *action); //david
+        bool addSettlement(Settlement *settlement); //eitan
+        bool addFacility(FacilityType facility); //david
+        bool isSettlementExists(const string &settlementName); //eitan
+        Settlement &getSettlement(const string &settlementName); //david
+        Plan &getPlan(const int planID);//eitan
+        void step();//david
+        void close();//eitan
+        void open();//david
+        
 
     private:
         bool isRunning;
@@ -31,5 +32,5 @@ class Simulation {
         vector<BaseAction*> actionsLog;
         vector<Plan> plans;
         vector<Settlement*> settlements;
-        vector<FacilityType> facilitiesOptions;
+        vector<FacilityType> facilitiesOptions; //by config file
 };
