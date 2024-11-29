@@ -46,7 +46,8 @@ void AddPlan::act(Simulation &simulation) {
     }
     // Add the plan to the simulation
     if(simulation.isSettlementExists(settlementName)){
-        throw std::invalid_argument("Settlement does not exist");
+        erorr("Settlement does not exist");
     }
     simulation.addPlan(simulation.getSettlement(settlementName), policy);
+    simulation.addAction(this);
 }
