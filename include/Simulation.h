@@ -19,11 +19,15 @@ class Simulation {
         bool addSettlement(Settlement *settlement); //eitan
         bool addFacility(FacilityType facility); //david
         bool isSettlementExists(const string &settlementName); //eitan
+        bool isFacilityExists(const string &facilityName); //eitan
+        bool isPlanExists(const int planID); //david
+        &vector<Plan> Plans(); //eitan
         Settlement &getSettlement(const string &settlementName); //david
-        Plan &getPlan(const int planID);//eitan
+        Plan &getPlan(const int planID) noexcept(false);//eitan
         void step();//david
         void close();//eitan
         void open();//david
+
         
 
     private:
@@ -33,4 +37,5 @@ class Simulation {
         vector<Plan> plans;
         vector<Settlement*> settlements;
         vector<FacilityType> facilitiesOptions; //by config file
+
 };

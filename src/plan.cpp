@@ -58,7 +58,7 @@ void Plan::step(){ //TODO: Update the scores
         {
             if(fac->step() == FacilityStatus::OPERATIONAL){ // notice we reduced the time remaining the moment we call the step func
                 // remove fac from _underConstruction:
-                underConstruction.erase(std::remove(underConstruction.begin(), underConstruction.end(), fac), underConstruction.end());
+                //underConstruction.erase(std::remove(underConstruction.begin(), underConstruction.end(), fac), underConstruction.end());
                 // remove - moves fac to the end of the vector, and then we erase the last value in the vector 
                 free_construction_slots ++;
                 facilities.push_back(fac);

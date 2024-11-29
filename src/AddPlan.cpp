@@ -12,9 +12,8 @@ AddPlan::AddPlan(const std::string &settlementName, const std::string &selection
     : settlementName(settlementName), selectionPolicy(selectionPolicy) {
     // Check if the provided selection policy is valid
     if (!isApolicy(selectionPolicy)) {
-        throw std::invalid_argument("Invalid selection policy");
+        this->error("Invalid selection policy");
     }
-
     
 }
 
@@ -44,10 +43,22 @@ void AddPlan::act(Simulation &simulation) {
     } else if (selectionPolicy == "env") {
         policy = new SustainabilitySelection();
     }
-    // Add the plan to the simulation
+    
+   
     if(simulation.isSettlementExists(settlementName)){
-        erorr("Settlement does not exist");
+        this->error("Settlement does not exist");
+    }else{
+        // Add the plan to the simulation
+        simulation.addPlan(simulation.getSettlement(settlementName), policy);
+        simulation.addAction(this); 
+        this->complete();
     }
-    simulation.addPlan(simulation.getSettlement(settlementName), policy);
-    simulation.addAction(this);
+
+    
 }
+
+// Function to return a string representation of the action
+const std::string AddPlan::toString() const {
+    return "Add Plan: " + settlementName + " " + selectionPolicy;
+}
+
