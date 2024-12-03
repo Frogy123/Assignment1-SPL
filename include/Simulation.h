@@ -21,12 +21,13 @@ class Simulation {
         bool isSettlementExists(const string &settlementName); //eitan
         bool isFacilityExists(const string &facilityName); //eitan
         bool isPlanExists(const int planID); //david
-        &vector<Plan> Plans(); //eitan
+        int getPlanCounter() const; //eitan
         Settlement &getSettlement(const string &settlementName); //david
         Plan &getPlan(const int planID) noexcept(false);//eitan
         void step();//david
         void close();//eitan
         void open();//david
+        void printActionsLog(); // david - using the to string method of each action
 
         
 

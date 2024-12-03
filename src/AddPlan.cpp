@@ -9,7 +9,7 @@ std::vector<std::string> selectionPolicies = {"nve", "bal", "eco", "env"};
 
 // Constructor for AddPlan class
 AddPlan::AddPlan(const std::string &settlementName, const std::string &selectionPolicy)
-    : settlementName(settlementName), selectionPolicy(selectionPolicy) {
+    : _settlementName(settlementName), _selectionPolicy(selectionPolicy) {
     // Check if the provided selection policy is valid
     if (!isApolicy(selectionPolicy)) {
         this->error("Invalid selection policy");
@@ -32,25 +32,27 @@ bool isApolicy(const std::string &policy) {
 
 // Function to perform the action of adding a plan to the simulation
 void AddPlan::act(Simulation &simulation) {
+
+    simulation.addAction(this); // Add the action to the simulation
+
     // Create a new SelectionPolicy object (this line seems to have a typo and should be corrected)
     SelectionPolicy *policy = nullptr;
-    if (selectionPolicy == "nve") {
+    if (_selectionPolicy == "nve") {
         policy = new NaiveSelection();
-    } else if (selectionPolicy == "bal") {
+    } else if (_selectionPolicy == "bal") {
         policy = new BalancedSelection(0, 0, 0);       
-    } else if (selectionPolicy == "eco") {
+    } else if (_selectionPolicy == "eco") {
         policy = new EconomySelection();
-    } else if (selectionPolicy == "env") {
+    } else if (_selectionPolicy == "env") {
         policy = new SustainabilitySelection();
     }
     
    
-    if(simulation.isSettlementExists(settlementName)){
+    if(simulation.isSettlementExists(_settlementName)){
         this->error("Settlement does not exist");
     }else{
         // Add the plan to the simulation
-        simulation.addPlan(simulation.getSettlement(settlementName), policy);
-        simulation.addAction(this); 
+        simulation.addPlan(simulation.getSettlement(_settlementName), policy);
         this->complete();
     }
 
@@ -59,6 +61,6 @@ void AddPlan::act(Simulation &simulation) {
 
 // Function to return a string representation of the action
 const std::string AddPlan::toString() const {
-    return "Add Plan: " + settlementName + " " + selectionPolicy;
+    return "Add Plan: " + _settlementName + " " + _selectionPolicy;
 }
 

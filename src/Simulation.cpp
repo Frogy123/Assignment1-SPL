@@ -2,5 +2,6 @@
 #include "Action.h"
 
 void Simulation::addPlan(const Settlement &settlement, SelectionPolicy *selectionPolicy) {
-    AddPlan action = AddPlan(settlement.getName(), selectionPolicy);
+   Plan* p = new Plan(planCounter, settlement, selectionPolicy, facilitiesOptions);
+   plans.push_back(*p);
 }

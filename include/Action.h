@@ -24,8 +24,8 @@ class BaseAction{
         const string& getErrorMsg() const;
 
     private:
-        string errorMsg;
-        ActionStatus status;
+        string _errorMsg;
+        ActionStatus _status;
 };
 
 class SimulateStep : public BaseAction {
@@ -36,7 +36,7 @@ class SimulateStep : public BaseAction {
         const string toString() const override;
         SimulateStep *clone() const override;
     private:
-        const int numOfSteps;
+        const int _numOfSteps;
 };
 
 class AddPlan : public BaseAction {
@@ -46,8 +46,8 @@ class AddPlan : public BaseAction {
         const string toString() const override;
         AddPlan *clone() const override;
     private:
-        const string settlementName;
-        const string selectionPolicy;
+        const string _settlementName;
+        const string _selectionPolicy;
         
         
 };
@@ -60,8 +60,8 @@ class AddSettlement : public BaseAction {
         AddSettlement *clone() const override;
         const string toString() const override;
     private:
-        const string settlementName;
-        const SettlementType settlementType;
+        const string _settlementName;
+        const SettlementType _settlementType;
 };
 
 
@@ -73,12 +73,12 @@ class AddFacility : public BaseAction {
         AddFacility *clone() const override;
         const string toString() const override;
     private:
-        const string facilityName;
-        const FacilityCategory facilityCategory;
-        const int price;
-        const int lifeQualityScore;
-        const int economyScore;
-        const int environmentScore;
+        const string _facilityName;
+        const FacilityCategory _facilityCategory;
+        const int _price;
+        const int _lifeQualityScore;
+        const int _economyScore;
+        const int _environmentScore;
 
 };
 
@@ -89,7 +89,7 @@ class PrintPlanStatus: public BaseAction {
         PrintPlanStatus *clone() const override;
         const string toString() const override;
     private:
-        const int planId;
+        const int _planId;
 };
 
 
@@ -100,8 +100,8 @@ class ChangePlanPolicy : public BaseAction {
         ChangePlanPolicy *clone() const override;
         const string toString() const override;
     private:
-        const int planId;
-        const string newPolicy;
+        const int _planId;
+        const string _newPolicy;
 };
 
 

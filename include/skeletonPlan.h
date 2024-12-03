@@ -1,5 +1,7 @@
 #pragma once
 #include <vector>
+#include <algorithm>
+
 #include "Facility.h"
 #include "Settlement.h"
 #include "SelectionPolicy.h"
@@ -22,20 +24,15 @@ class Plan {
         const vector<Facility*> &getFacilities() const;
         void addFacility(Facility* facility);
         const string toString() const;
-        const string getPolicy() const;
-        //rule of 3:
-        Plan(const Plan &other);
-        ~Plan();
-        Plan& operator=(const Plan &other);
 
     private:
         int _plan_id;
-        const Settlement &_settlement;
-        SelectionPolicy *_selectionPolicy; //What happens if we change this to a reference?
+        const Settlement& _settlement;
+        SelectionPolicy* _selectionPolicy; //What happens if we change this to a reference?
         PlanStatus _status;
         vector<Facility*> _facilities;
         vector<Facility*> _underConstruction;
-        const vector<FacilityType> &_facilityOptions;
+        const vector<FacilityType>& _facilityOptions;
         int _life_quality_score, _economy_score, _environment_score;
         const int _construction_limit; 
         int _free_construction_slots; 
