@@ -23,11 +23,18 @@ class Simulation {
         bool isPlanExists(const int planID); //david
         int getPlanCounter() const; //eitan
         Settlement &getSettlement(const string &settlementName); //david
-        Plan &getPlan(const int planID) noexcept(false);//eitan
+        Plan &getPlan(const int planID);//eitan
         void step();//david
         void close();//eitan
-        void open();//david
+        void open();//david 
         void printActionsLog(); // david - using the to string method of each action
+        void clear(); //eitan
+
+        //rule of 5:
+        Simulation(const Simulation &other);
+        ~Simulation();
+        Simulation(Simulation &&other);
+        Simulation& operator=(Simulation &&other);
 
         
 

@@ -2,20 +2,20 @@
 #include "Action.h"
 
 ActionStatus BaseAction::getStatus() const {
-    return status;
+    return _status;
 }
 
 void BaseAction::complete() {
-    status = ActionStatus::COMPLETED;
+    _status = ActionStatus::COMPLETED;
 }
 
 void BaseAction::error(string errorMsg) {
-    status = ActionStatus::ERROR;
-    this->errorMsg = errorMsg;
+    _status = ActionStatus::ERROR;
+    this->_errorMsg = errorMsg;
 }
 
 const std::string& BaseAction::getErrorMsg() const {
-    return errorMsg;
+    return _errorMsg;
 }
 
 

@@ -26,7 +26,8 @@ class Plan {
         //rule of 3:
         Plan(const Plan &other);
         ~Plan();
-        Plan& operator=(const Plan &other);
+        Plan& operator=(const Plan &other) = delete;
+
 
     private:
         int _plan_id;

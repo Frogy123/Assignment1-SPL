@@ -59,6 +59,10 @@ void AddPlan::act(Simulation &simulation) {
     
 }
 
+// Function to clone the AddPlan action
+AddPlan *AddPlan::clone() const {
+    return new AddPlan(*this);
+
 // Function to return a string representation of the action
 const std::string AddPlan::toString() const {
     return "Add Plan: " + _settlementName + " " + _selectionPolicy;

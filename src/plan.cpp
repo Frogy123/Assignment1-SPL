@@ -45,6 +45,8 @@ Plan:: ~Plan(){
     }
 }
 
+Plan& Plan::operator=(const Plan &other);
+
 
 //getters:
 

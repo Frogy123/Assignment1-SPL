@@ -17,6 +17,7 @@ void AddFacility::act(Simulation &simulation) {
     this->complete();
     }
     
+    AddFacility *AddFacility::clone() const {
 
 }
 

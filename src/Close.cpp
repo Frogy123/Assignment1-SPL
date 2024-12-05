@@ -10,9 +10,8 @@ void Close::act(Simulation &simulation) {
     }
 
     this->complete();
-    simulation.close();
-    
-    
+    simulation.close(); 
+    delete simulation; 
 }
 
 const string Close::toString() const {
