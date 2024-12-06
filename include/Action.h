@@ -6,8 +6,16 @@ enum class SettlementType;
 enum class FacilityCategory;
 
 enum class ActionStatus{
-    COMPLETED, ERROR
+    COMPLETED, ERROR, PENDING
 };
+
+string ActionStatusToString(ActionStatus status){
+    if(status == ActionStatus::COMPLETED)
+        return "COMPLETED";
+    else if(status == ActionStatus::ERROR)
+        return "ERROR";
+    else return "PENDING";
+}
 
 class BaseAction{
     public:
@@ -45,6 +53,7 @@ class AddPlan : public BaseAction {
         void act(Simulation &simulation) override;
         const string toString() const override;
         AddPlan *clone() const override;
+        bool isApolicy(const std::string &policy);
     private:
         const string _settlementName;
         const string _selectionPolicy;

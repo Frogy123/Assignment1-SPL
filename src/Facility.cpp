@@ -1,6 +1,40 @@
 #include "Facility.h"
 
+//FacilityType:
+FacilityType::FacilityType(const string &name, const FacilityCategory category, const int price, const int lifeQuality_score, const int economy_score, const int environment_score):
+ name(name), category(category), price(price), lifeQuality_score(lifeQuality_score), economy_score(economy_score), environment_score(environment_score) //first intalization
+     {}
 
+const string &FacilityType::getName() const{
+    return name;
+}
+
+int FacilityType::getCost() const{
+    return price;
+}
+
+int FacilityType::getLifeQualityScore() const{
+    return lifeQuality_score;
+}
+
+int FacilityType::getEnvironmentScore() const{
+    return environment_score;
+}
+
+int FacilityType::getEconomyScore() const{
+    return economy_score;
+}
+
+FacilityCategory FacilityType::getCategory() const{
+    return category;
+}
+
+
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+//Facility:
 //constructor 1
 Facility:: Facility(const string &name, const string &settlementName, const FacilityCategory category,const int price, const int lifeQuality_score, const int economy_score,
 const int environment_score): 
@@ -54,11 +88,11 @@ FacilityStatus Facility::step(){
 //to string:
 const string Facility::toString() const{
     
-    return "settlement name: " + settlementName +"\nstatus: " +  toString() + "\ntime left: " +std::to_string(timeLeft);
+    return "settlement name: " + settlementName +"\nstatus: " +  FacilityStatusToString(status) + "\ntime left: " +std::to_string(timeLeft);
 }
 
 
-const string Facility::toString() const{
+const string Facility::FacilityStatusToString(FacilityStatus status) const{
     string status_str;
     switch(status){
         case FacilityStatus::UNDER_CONSTRUCTIONS:

@@ -12,12 +12,15 @@ enum class SettlementType {
     METROPOLIS,
 };
 
+string SettlementTypeTostring(SettlementType type);
+
 class Settlement {
     public:
         Settlement(const string &name, SettlementType type);
         const string &getName() const;
         SettlementType getType() const;
         const string toString() const;
+        
 
         private:
             const string name;

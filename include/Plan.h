@@ -23,10 +23,27 @@ class Plan {
         void addFacility(Facility* facility);
         const string toString() const;
         const string getPolicy() const;
-        //rule of 3:
+        int getID();
+        
+
+        // rule of 5:
+
+        //copy constructor :
         Plan(const Plan &other);
+
+        //destructor:
         ~Plan();
+
+
+        //copy assignment operator: not clear how to implement and is not used
         Plan& operator=(const Plan &other) = delete;
+        //move assignment opperator:not clear how to implement and is not used
+        Plan& operator=(const Plan &&other) = delete;
+
+        //move constructor:
+        Plan(Plan&& other);
+
+
 
 
     private:

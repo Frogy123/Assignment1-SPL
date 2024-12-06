@@ -1,6 +1,7 @@
 #include "../include/Plan.h"
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 //constructor:
 
@@ -10,11 +11,13 @@ _settlement(settlement),
 _selectionPolicy(selectionPolicy),
 _facilityOptions(facilityOptions),
 _construction_limit(((int)settlement.getType()) + 1), // VILLAGE = 0 , CITY = 1, METROPOLIS = 2 : buildLimit(VILLAGE) = 1 , buildLimit(CITY) = 2, buildLimit(METROPOLIS) = 3
-_free_construction_slots(_construction_limit), 
+_free_construction_slots(0), 
 _status(PlanStatus::AVALIABLE)
-{} //the scores are intialized to zero by deafault, and _facilities,  _underConstruction are intialized to null_ptr 
+{
+    _free_construction_slots = _construction_limit;
+} //the scores are intialized to zero by deafault, and _facilities,  _underConstruction are intialized to null_ptr 
 
-//rule of 3:
+//rule of 5:
 
 Plan::Plan(const Plan &other):
 _plan_id(other._plan_id),
@@ -45,7 +48,7 @@ Plan:: ~Plan(){
     }
 }
 
-Plan& Plan::operator=(const Plan &other);
+
 
 
 //getters:
@@ -65,6 +68,14 @@ const int Plan::getEnvironmentScore() const{
 }
 
 
+int Plan:: getID(){
+    return _plan_id;
+}
+
+string const Plan::getPolicy() const{
+    return _selectionPolicy->getPolicyType();
+}
+
 // setters:
 void Plan::setSelectionPolicy(SelectionPolicy *selectionPolicy){
 
@@ -74,7 +85,7 @@ void Plan::setSelectionPolicy(SelectionPolicy *selectionPolicy){
 
 
 // other methods:
-void Plan::step(){ //TODO: Update the scores 
+void Plan::step(){ 
     if(_status == PlanStatus::AVALIABLE){
         while(_free_construction_slots > 0)
         {
@@ -90,9 +101,12 @@ void Plan::step(){ //TODO: Update the scores
         {
             if(fac->step() == FacilityStatus::OPERATIONAL){ // notice we reduced the time remaining the moment we call the step func
                 // remove fac from _underConstruction:
-                //underConstruction.erase(std::remove(underConstruction.begin(), underConstruction.end(), fac), underConstruction.end());
+                _underConstruction.erase(std::remove(_underConstruction.begin(), _underConstruction.end(), fac), _underConstruction.end());
                 // remove - moves fac to the end of the vector, and then we erase the last value in the vector 
                 _free_construction_slots ++;
+                _life_quality_score += fac->getLifeQualityScore();
+                _economy_score += fac->getEconomyScore();
+                _environment_score += fac->getEnvironmentScore();
                 _facilities.push_back(fac);
             }
         }
@@ -105,11 +119,6 @@ void Plan::step(){ //TODO: Update the scores
 
 }
 
-
-
-
-
-
 void Plan::printStatus(){
     string status_str;
     if(_status == PlanStatus::AVALIABLE)
@@ -121,7 +130,7 @@ void Plan::printStatus(){
     << "\nPlanID: " << _plan_id
     << "\nSettlementName " << _settlement.getName()
     << "\nPlanStatus: " << status_str
-    //<< "\nSelectionPolicy: " << selectionPolicy->getPolicyType()
+    << "\nSelectionPolicy: " << _selectionPolicy->getPolicyType()
     << "\nLifeQualityScore: " << _life_quality_score
     << "\nEconomyScore: " << _economy_score
     << "\nEnvrionmentScore: "  << _environment_score
