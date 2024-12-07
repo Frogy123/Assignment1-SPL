@@ -9,7 +9,7 @@ enum class ActionStatus{
     COMPLETED, ERROR, PENDING
 };
 
-string ActionStatusToString(ActionStatus status){
+static string ActionStatusToString(ActionStatus status){
     if(status == ActionStatus::COMPLETED)
         return "COMPLETED";
     else if(status == ActionStatus::ERROR)

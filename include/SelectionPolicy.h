@@ -39,6 +39,8 @@ class BalancedSelection: public SelectionPolicy {
 
     private:
         int calculateDistance(int x, int y, int z);
+        int minElement(vector<int>& nums);
+        int maxElement(vector<int>& nums);
         int LifeQualityScore;
         int EconomyScore;
         int EnvironmentScore;

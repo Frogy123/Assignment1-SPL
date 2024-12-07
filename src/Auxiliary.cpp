@@ -18,3 +18,25 @@ std::vector<std::string> Auxiliary::parseArguments(const std::string& line) {
 
     return arguments;
 }
+
+int Auxiliary::maxElement(std::vector<int>& nums) {
+
+    int max = nums[0];
+    for (int i = 1; i < nums.size(); i++) {
+        if (nums[i] > max) {
+            max = nums[i];
+        }
+    }
+    return max;
+}
+
+int Auxiliary::minElement(std::vector<int>& nums) {
+    
+    int min = nums[0];
+    for (int i = 1; i < nums.size(); i++) {
+        if (nums[i] < min) {
+            min = nums[i];
+        }
+    }
+    return min;
+}

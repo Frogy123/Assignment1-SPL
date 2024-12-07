@@ -2,6 +2,7 @@
 #include <vector>
 #include <string>
 #include <climits>
+#include <Auxiliary.h>
 #include <bits/algorithmfwd.h>
 
 //################################################################################
@@ -32,6 +33,10 @@ SustainabilitySelection* SustainabilitySelection::clone() const {
     return new SustainabilitySelection(*this);
 }
 
+const string SustainabilitySelection::getPolicyType() const{
+    return "Sustainability";
+}
+
 //end SustainabilitySelection
 //################################################################################
 
@@ -53,6 +58,10 @@ const std::string NaiveSelection::toString() const {
 
 NaiveSelection *NaiveSelection::clone() const {
     return new NaiveSelection(*this);
+}
+
+const string NaiveSelection::getPolicyType() const{
+    return "Naive";
 }
 
 //end NaiveSelection
@@ -89,6 +98,11 @@ EconomySelection* EconomySelection::clone() const {
     return new EconomySelection(*this);
 }
 
+const string EconomySelection::getPolicyType() const{
+    return "Economy";
+}
+
+
 //end EconomySelection
 //################################################################################
 
@@ -114,8 +128,8 @@ const FacilityType& BalancedSelection::selectFacility(const vector<FacilityType>
 
 int BalancedSelection::calculateDistance(int x, int y, int z) {
     std::vector<int> nums = {x, y, z};
-    int max = *std::max_element(nums.begin(), nums.end());
-    int min = *std::min_element(nums.begin(), nums.end());
+    int max = Auxiliary::maxElement(nums);
+    int min = Auxiliary::minElement(nums);
     return max - min;
 }
 
@@ -125,6 +139,10 @@ const string BalancedSelection::toString() const {
 
 BalancedSelection* BalancedSelection::clone() const {
     return new BalancedSelection(*this);
+}
+
+const string BalancedSelection::getPolicyType() const{
+    return "Balanced";
 }
 
 
